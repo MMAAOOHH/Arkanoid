@@ -1,10 +1,11 @@
-#include "projectile.h"
+#include "ball.h"
 #include "engine.h"
 #include "collision.h"
 #include "game.h"
+
 float sign(float a) { return a > 0.f ? 1.f : -1.f; }
 
-void Projectile::update()
+void Ball::update()
 {
 	if (!alive)
 		return;
@@ -20,7 +21,7 @@ void Projectile::update()
 	//step(velocity_x * delta_time, velocity_y * delta_time);
 }
 
-void Projectile::draw()
+void Ball::draw()
 {
 	if (!alive)
 		return;
@@ -31,9 +32,9 @@ void Projectile::draw()
 	SDL_RenderFillRect(render, &rect);
 }
 
-bool Projectile::step(float dx, float dy)
+bool Ball::step(float dx, float dy)
 {
-	// Collision check with brick!
+	// Draws collision circle for collision with bricks
 	Circle circle = { x + dx, y + dy, 4 };
 	draw_circle(circle);
 
@@ -43,8 +44,10 @@ bool Projectile::step(float dx, float dy)
 		if (!brick.alive)
 			continue;
 
+		//Makes collision for brick
 		AABB box = AABB::make_from_position_size(brick.x, brick.y, brick.w, brick.h);
 
+		//Collisioncheck
 		if (aabb_circle_intersect(box, circle))
 			return false;
 	}

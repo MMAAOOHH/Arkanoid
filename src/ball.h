@@ -1,6 +1,6 @@
 #pragma once
 
-struct Projectile
+struct Ball
 {
 	bool alive = false;
 	float x;

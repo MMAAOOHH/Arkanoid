@@ -4,7 +4,7 @@
 
 void Player::update()
 {
-	// move
+	// move with input
 	if (keys[SDL_SCANCODE_D])
 		x += 200 * delta_time;
 	if (keys[SDL_SCANCODE_A])
@@ -18,10 +18,13 @@ void Player::update()
 	shoot_timer -= delta_time;
 	if (keys[SDL_SCANCODE_SPACE] && shoot_timer < 0.f)
 	{
-		Projectile& proj = projectiles[next_projectile_index];
+		Ball& proj = balls[next_projectile_index];
 		proj.alive = true;
+
+		//Projectile position = player position
 		proj.x = x;
 		proj.y = y;
+
 
 		proj.velocity_x = 200.f;
 		
@@ -34,13 +37,16 @@ void Player::update()
 		shoot_timer = 0.2f;
 
 		next_projectile_index++;
-		next_projectile_index = next_projectile_index % PROJECTILE_MAX;
+		next_projectile_index = next_projectile_index % BALL_MAX;
 	}
 }
 
 void Player::draw()
 {
+	//Set the color
 	SDL_SetRenderDrawColor(render, 150, 25, 40, 255);
+	//Create Player rect
 	SDL_Rect rect = { (int)x - 16, (int)y - 16, 32, 32 };
+	//Render
 	SDL_RenderFillRect(render, &rect);
 }

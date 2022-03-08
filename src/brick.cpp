@@ -9,6 +9,9 @@ void Brick::draw()
 		return;
 
 	SDL_SetRenderDrawColor(render, 200, 200, 50, 255);
+
+	//Just temp not used for collision
 	AABB box = AABB::make_from_position_size(x, y, w, h);
+
 	draw_box(box);
 }

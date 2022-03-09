@@ -3,15 +3,36 @@
 #include "engine.h"
 #include <SDL/SDL.h>
 
+
+void Brick::take_damage()
+{
+	if (type == unbreakable)
+		return;
+
+	hit_points--;
+
+	if (hit_points <= 0)
+		alive = false;
+}
+
 void Brick::draw()
 {
 	if (!alive)
 		return;
 
-	SDL_SetRenderDrawColor(render, 200, 200, 50, 255);
+	switch(hit_points) 
+	{
+		case 1:
+			SDL_SetRenderDrawColor(render, 200, 200, 200, 255);
+			break;
+		case 2:
+			SDL_SetRenderDrawColor(render, 200, 200, 100, 255);
+			break;
+		case 3:
+			SDL_SetRenderDrawColor(render, 200, 200, 50, 255);
+			break;
+	}
 
-	//Just temp not used for collision
-	AABB box = AABB::make_from_position_size(x, y, w, h);
-
-	draw_box(box);
+	SDL_Rect rect = { (int)x - w/2, (int)y - h/2, w, h};
+	SDL_RenderFillRect(render, &rect);
 }

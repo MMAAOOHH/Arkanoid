@@ -21,9 +21,9 @@ int main()
 	Uint64 previous_ticks = SDL_GetPerformanceCounter();
 
 	//Creates bricks
-	for(int i=0; i<BRICK_MAX; ++i)
+	for (int i = 0; i<BRICK_MAX; ++i)
 	{
-		bricks[i].y = 140 * i;
+		bricks[i].x = 90 * i;
 	}
  
 	//Gameloop
@@ -87,8 +87,8 @@ int main()
 			balls[i].draw();
 		}
 
-		//All bricks
-		for(int i=0; i<BRICK_MAX; ++i)
+		// Draw all bricks
+		for (int i = 0; i<BRICK_MAX; ++i)
 		{
 			bricks[i].draw();
 		}

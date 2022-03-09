@@ -34,9 +34,9 @@ void Ball::draw()
 
 bool Ball::step(float dx, float dy)
 {
-	// Draws collision circle for collision with bricks
+	//Collision circle for collision
 	Circle circle = { x + dx, y + dy, 4 };
-	draw_circle(circle);
+	//draw_circle(circle);
 
 	for (int i = 0; i < BRICK_MAX; ++i)
 	{
@@ -47,10 +47,19 @@ bool Ball::step(float dx, float dy)
 		//Makes collision for brick
 		AABB box = AABB::make_from_position_size(brick.x, brick.y, brick.w, brick.h);
 
-		//Collisioncheck
+		//Collisioncheck with bricks
 		if (aabb_circle_intersect(box, circle))
+		{
+			brick.take_damage();
 			return false;
+		}
 	}
+
+	//Check collision with player
+	Player& p = player;
+	AABB box = AABB::make_from_position_size(p.x, p.y, p.w, p.h);
+	if (aabb_circle_intersect(box, circle))
+		return false;
 
 	// Check collisions with game borders
 	if (x + dx < 0 || x + dx >= 800 ||

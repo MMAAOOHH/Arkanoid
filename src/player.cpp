@@ -1,18 +1,24 @@
+#include <iostream>
 #include "player.h"
 #include "engine.h"
 #include "game.h"
+#include "collision.h"
+
 
 void Player::update()
 {
 	// move with input
 	if (keys[SDL_SCANCODE_D])
-		x += 200 * delta_time;
+		x += move_speed * delta_time;
 	if (keys[SDL_SCANCODE_A])
-		x -= 200 * delta_time;
+		x -= move_speed * delta_time;
+
+	/*
 	if (keys[SDL_SCANCODE_W])
-		y -= 200 * delta_time;
+		y -= 400 * delta_time;
 	if (keys[SDL_SCANCODE_S])
-		y += 200 * delta_time;
+		y += 400 * delta_time;
+		*/
 
 	// shoot! pew pew
 	shoot_timer -= delta_time;
@@ -23,7 +29,7 @@ void Player::update()
 
 		//Projectile position = player position
 		proj.x = x;
-		proj.y = y;
+		proj.y = y - 10;
 
 
 		proj.velocity_x = 200.f;
@@ -46,7 +52,8 @@ void Player::draw()
 	//Set the color
 	SDL_SetRenderDrawColor(render, 150, 25, 40, 255);
 	//Create Player rect
-	SDL_Rect rect = { (int)x - 16, (int)y - 16, 32, 32 };
+	SDL_Rect rect = { (int)x - w/2, (int)y - h/2, w, h };
+
 	//Render
 	SDL_RenderFillRect(render, &rect);
 }

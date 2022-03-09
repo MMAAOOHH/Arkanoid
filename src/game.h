@@ -2,8 +2,8 @@
 #include "player.h"
 #include "ball.h"
 #include "brick.h"
-#define BALL_MAX 20
-#define BRICK_MAX 8
+#define BALL_MAX 10
+#define BRICK_MAX 10
 
 extern Player player;
 extern Ball balls[BALL_MAX];

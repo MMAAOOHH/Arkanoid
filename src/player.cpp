@@ -7,18 +7,11 @@
 
 void Player::update()
 {
-	// move with input
-	if (keys[SDL_SCANCODE_D])
+	// move with input if not hitting edge of screen
+	if (keys[SDL_SCANCODE_D] && (x + w/ 2) <= 800) 
 		x += move_speed * delta_time;
-	if (keys[SDL_SCANCODE_A])
+	if (keys[SDL_SCANCODE_A] && (x - w / 2) >= 0)
 		x -= move_speed * delta_time;
-
-	/*
-	if (keys[SDL_SCANCODE_W])
-		y -= 400 * delta_time;
-	if (keys[SDL_SCANCODE_S])
-		y += 400 * delta_time;
-		*/
 
 	// shoot! pew pew
 	shoot_timer -= delta_time;
@@ -50,10 +43,9 @@ void Player::update()
 void Player::draw()
 {
 	//Set the color
-	SDL_SetRenderDrawColor(render, 150, 25, 40, 255);
+	SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
 	//Create Player rect
 	SDL_Rect rect = { (int)x - w/2, (int)y - h/2, w, h };
-
 	//Render
 	SDL_RenderFillRect(render, &rect);
 }

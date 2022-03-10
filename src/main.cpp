@@ -12,7 +12,7 @@ int main()
 {
 
 	SDL_Init(SDL_INIT_EVERYTHING); 
-	window = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800,600,0); 
+	window = SDL_CreateWindow("Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800,600,0); 
 	render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
  
 	bool running = true;
@@ -20,10 +20,10 @@ int main()
 	//Gets cpu ticks
 	Uint64 previous_ticks = SDL_GetPerformanceCounter();
 
-	//Creates bricks
+	//Creates bricks TEMP
 	for (int i = 0; i<BRICK_MAX; ++i)
 	{
-		bricks[i].x = 90 * i;
+		bricks[i].x = (62 * i) + (bricks[i].w /2);
 	}
  
 	//Gameloop

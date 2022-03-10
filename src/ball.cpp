@@ -18,7 +18,6 @@ void Ball::update()
 	{
 		velocity_y = -velocity_y + sign(-velocity_y) * 10;
 	}
-	//step(velocity_x * delta_time, velocity_y * delta_time);
 }
 
 void Ball::draw()
@@ -38,19 +37,23 @@ bool Ball::step(float dx, float dy)
 	Circle circle = { x + dx, y + dy, 4 };
 	//draw_circle(circle);
 
-	for (int i = 0; i < BRICK_MAX; ++i)
+	for (int i = 0; i < NUM_BRICKS; ++i)
 	{
-		Brick& brick = bricks[i];
+		/* Brick& brick = bricks[i];
 		if (!brick.alive)
+			continue; */		
+		
+		Brick* brick = bricks[i];
+		if (brick == nullptr)
 			continue;
 
 		//Makes collision for brick
-		AABB box = AABB::make_from_position_size(brick.x, brick.y, brick.w, brick.h);
+		AABB box = AABB::make_from_position_size(brick->x, brick->y, brick->w, brick->h);
 
 		//Collisioncheck with bricks
 		if (aabb_circle_intersect(box, circle))
 		{
-			brick.take_damage();
+			brick->take_damage();
 			return false;
 		}
 	}

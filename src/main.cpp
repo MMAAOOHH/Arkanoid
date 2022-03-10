@@ -3,7 +3,6 @@
 #include <SDL/SDL.h>
 #include <stdlib.h>
 #include "engine.h"
-#include "player.h"
 #include "game.h"
 #include "collision.h"
 
@@ -20,11 +19,8 @@ int main()
 	//Gets cpu ticks
 	Uint64 previous_ticks = SDL_GetPerformanceCounter();
 
-	//Creates bricks TEMP
-	for (int i = 0; i<BRICK_MAX; ++i)
-	{
-		bricks[i].x = (62 * i) + (bricks[i].w /2);
-	}
+	//Creates bricks
+	loadMap();
  
 	//Gameloop
 	while (running)
@@ -68,6 +64,12 @@ int main()
  
 				break;
 			}
+
+			case SDL_MOUSEMOTION:
+
+				//Get mouse things, deltax, deltay.
+
+				break;
 			}
 		}
  
@@ -88,9 +90,13 @@ int main()
 		}
 
 		// Draw all bricks
-		for (int i = 0; i<BRICK_MAX; ++i)
+		for (int i = 0; i < NUM_BRICKS; ++i)
 		{
-			bricks[i].draw();
+			Brick* brick = bricks[i];
+			if (brick == nullptr)
+				continue;
+
+			brick->draw();
 		}
 
 		//Update the screen with any rendering performed since the previous call.

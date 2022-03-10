@@ -1,4 +1,5 @@
 #pragma once
+#include "collision.h"
 
 struct Brick
 {
@@ -9,20 +10,23 @@ struct Brick
 		a = 1, 
 		b = 2, 
 		c = 3, 
-		unbreakable
+		u //unbreakable
 	};
 
 	brick_type type = c;
+
 	//hitpoints defined by type
 	int hit_points = type;
 
 	//Position
-	float x = 400.f;
-	float y = 300.f;
+	float x;
+	float y;
 
 	//Size
-	float w = 60.f;
+	float w = 50.f;
 	float h = 20.f;
+
+	AABB getCollision() { return { x, y, w, h}; }
 
 	void take_damage();
 	void draw();

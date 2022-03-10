@@ -3,6 +3,7 @@
 struct Ball
 {
 	bool alive = false;
+
 	float x;
 	float y;
 

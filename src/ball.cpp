@@ -25,10 +25,10 @@ void Ball::draw()
 	if (!alive)
 		return;
 
-	SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_Rect rect = { (int)x - 4, (int)y - 4, 8, 8 };
 
-	SDL_RenderFillRect(render, &rect);
+	SDL_RenderFillRect(renderer, &rect);
 }
 
 bool Ball::step(float dx, float dy)

@@ -45,7 +45,9 @@ void loadMap()
 	}
 }
 
-//Refactoring
+Game::Game(){}
+Game::~Game(){}
+
 void Game::init()
 {
 	//Initilalize SDL
@@ -54,13 +56,13 @@ void Game::init()
 		window = SDL_CreateWindow("Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, 0);
 
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-		if(renderer)
-			SDL_SetRenderDrawColor(renderer, 25, 25, 40, 255);
-
 		isRunning = true;
 	}
 	else
 		isRunning = false;
+
+	//Gets the current CPU counter value.
+	previous_ticks = SDL_GetPerformanceCounter();
 }
 
 void Game::handleEvents()
@@ -71,17 +73,19 @@ void Game::handleEvents()
 		switch (event.type)
 		{
 		case SDL_QUIT:
+
 			isRunning = false;
+
 			break;
 
 		case SDL_KEYDOWN:
 		{
 			//Gets key down
 			int scancode = event.key.keysym.scancode;
-
-
-			// (scancode == SDL_SCANCODE_ESCAPE)
-				//Running = false;
+			
+			//Quit with esc
+			if(scancode == SDL_SCANCODE_ESCAPE)
+				isRunning = false;
 
 			keys[scancode] = true;
 
@@ -100,32 +104,40 @@ void Game::handleEvents()
 		case SDL_MOUSEMOTION:
 
 			//Get mouse things
-
 			break;
 		}
 	}
-
 }
 
 void Game::update() 
 {
-	//player.update();
-	//ball.update(); etc
+	//For framerate independence, delta time, 
+	Uint64 ticks = SDL_GetPerformanceCounter();
+	Uint64 delta_ticks = ticks - previous_ticks;
+	previous_ticks = ticks;
+	delta_time = (float)delta_ticks / SDL_GetPerformanceFrequency();
+
+	player.update();
+
+	for (int i = 0; i < BALL_MAX; ++i) 
+	{
+		balls[i].update();
+	}
 }
 
 void Game::render() 
 {
+	SDL_SetRenderDrawColor(renderer, 25, 25, 40, 255);
 	//Clear the current rendering target with the drawing color.
 	SDL_RenderClear(renderer);
-						
-	//	add what to render ex player.draw();
 
+	player.draw();
 
 	//All balls
-	/*for (int i = 0; i < BALL_MAX; ++i)
+	for (int i = 0; i < BALL_MAX; ++i)
 	{
 		balls[i].draw();
-	}*/
+	}
 
 	// Draw all bricks
 	/*for (int i = 0; i < NUM_BRICKS; ++i)
@@ -136,8 +148,6 @@ void Game::render()
 
 		brick->draw();
 	}*/
-
-
 
 	SDL_RenderPresent(renderer);
 }

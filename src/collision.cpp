@@ -20,7 +20,7 @@ void draw_circle(const Circle& c)
 		float y2 = sin(next_angle);
 
 		SDL_RenderDrawLine(
-			render,
+			renderer,
 			x1 * c.radius + c.x,
 			y1 * c.radius + c.y,
 			x2 * c.radius + c.x,
@@ -63,7 +63,7 @@ void draw_box(const AABB& box)
 		box.y_max - box.y_min
 	};
 
-	SDL_RenderDrawRect(render, &rect);
+	SDL_RenderDrawRect(renderer, &rect);
 }
 
 bool aabb_intersect(const AABB& a, const AABB& b)

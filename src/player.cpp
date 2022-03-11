@@ -43,9 +43,9 @@ void Player::update()
 void Player::draw()
 {
 	//Set the color
-	SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	//Create Player rect
 	SDL_Rect rect = { (int)x - w/2, (int)y - h/2, w, h };
 	//Render
-	SDL_RenderFillRect(render, &rect);
+	SDL_RenderFillRect(renderer, &rect);
 }

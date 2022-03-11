@@ -1,6 +1,7 @@
 #pragma once
-#include "engine.h"
 
+#include <SDL/SDL.h>
+#include "engine.h"
 #include "player.h"
 #include "ball.h"
 #include "brick.h"
@@ -16,11 +17,11 @@ extern Brick* bricks[MAP_COLS * MAP_ROWS];
 
 void loadMap();
 
-//Refactoring
-
 struct Game 
 {
+	//Constructor 
 	Game();
+	//Destructor
 	~Game();
 
 	void init();
@@ -29,6 +30,7 @@ struct Game
 	void render();
 	void clean();
 
+	//Find C# equivalent to understand better
 	bool running() { return isRunning; }
 
 private:

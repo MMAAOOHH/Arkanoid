@@ -1,49 +1,9 @@
 #include "game.h"
 
-const char* LEVEL =
-"................"
-"................"
-"................"
-".##############."
-"..############.."
-"...##########..."
-"................"
-"................"
-"................"
-".##############."
-".##############."
-"................"
-"................"
-"................"
-"................"
-"................"
-"................"
-"................"
-"................"
-"................";
-
 Player player;
+Level level;
 Ball balls[BALL_MAX];
-Brick* bricks[MAP_COLS * MAP_ROWS] = { nullptr };
 
-void loadMap()
-{
-	const char* ptr = LEVEL;
-	for (int y = 0; y < MAP_ROWS; ++y)
-	{
-		for (int x = 0; x < MAP_COLS; ++x, ++ptr)
-		{
-			if (*ptr != '#')
-				continue;
-
-			Brick* brick = new Brick();
-			brick->x = x * (brick->w + 1);
-			brick->y = y * (brick->h + 1);
-
-			bricks[y * MAP_COLS + x] = brick;
-		}
-	}
-}
 
 Game::Game(){}
 Game::~Game(){}
@@ -63,6 +23,9 @@ void Game::init()
 
 	//Gets the current CPU counter value.
 	previous_ticks = SDL_GetPerformanceCounter();
+
+	//Create level, should be moved!
+	level.create();
 }
 
 void Game::handleEvents()
@@ -131,6 +94,7 @@ void Game::render()
 	//Clear the current rendering target with the drawing color.
 	SDL_RenderClear(renderer);
 
+	level.draw();
 	player.draw();
 
 	//All balls
@@ -138,16 +102,6 @@ void Game::render()
 	{
 		balls[i].draw();
 	}
-
-	// Draw all bricks
-	/*for (int i = 0; i < NUM_BRICKS; ++i)
-	{
-		Brick* brick = bricks[i];
-		if (brick == nullptr)
-			continue;
-
-		brick->draw();
-	}*/
 
 	SDL_RenderPresent(renderer);
 }

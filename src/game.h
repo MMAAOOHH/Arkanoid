@@ -3,22 +3,20 @@
 #include <SDL/SDL.h>
 #include "engine.h"
 #include "player.h"
+#include "level.h"
 #include "ball.h"
-#include "brick.h"
+
 
 #define BALL_MAX 10
-#define MAP_COLS 16
-#define MAP_ROWS 20
-#define NUM_BRICKS (MAP_COLS * MAP_ROWS)
 
 extern Player player;
+extern Level level;
 extern Ball balls[BALL_MAX];
-extern Brick* bricks[MAP_COLS * MAP_ROWS];
 
-void loadMap();
-
+//TODO: Struck vs class, weird t
 struct Game 
 {
+	//TODO: Dont know if really needed
 	//Constructor 
 	Game();
 	//Destructor
@@ -30,10 +28,9 @@ struct Game
 	void render();
 	void clean();
 
-	//Find C# equivalent to understand better
+	//TODO: Find C# equivalent to understand better, maybe just use isRunning bool.
 	bool running() { return isRunning; }
 
 private:
-	bool isRunning;
+	bool isRunning = false;
 };
-

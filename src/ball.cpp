@@ -44,7 +44,7 @@ bool Ball::step(float dx, float dy)
 			continue; */		
 		
 		Brick* brick = bricks[i];
-		if (brick == nullptr)
+		if (brick == nullptr || !brick->alive)
 			continue;
 
 		//Makes collision for brick

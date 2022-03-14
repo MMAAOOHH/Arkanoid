@@ -1,9 +1,10 @@
 #include "game.h" //#include - "pastes" in code, includes it.
 
 //main entry point, needed for all .exe files. 
+
 int main()
 {
-	//Creates game
+	//Create game
 	Game* game = new Game();
 	game->init();
 
@@ -18,4 +19,5 @@ int main()
 		SDL_Delay(16); 
 	}
 	game->clean();
+	return 0;
 }

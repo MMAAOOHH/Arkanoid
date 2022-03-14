@@ -4,7 +4,7 @@ struct Player
 {
 	//Start position
 	float x = 400.f;
-	float y = 560.f;
+	float y = 580.f;
 
 	//Paddle size
 	float w = 128.f;

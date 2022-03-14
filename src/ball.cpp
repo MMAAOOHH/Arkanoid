@@ -39,16 +39,14 @@ bool Ball::step(float dx, float dy)
 
 	for (int i = 0; i < NUM_BRICKS; ++i)
 	{
-		/* Brick& brick = bricks[i];
-		if (!brick.alive)
-			continue; */		
-		
 		Brick* brick = bricks[i];
+
 		if (brick == nullptr || !brick->alive)
 			continue;
 
 		//Makes collision for brick
-		AABB box = AABB::make_from_position_size(brick->x, brick->y, brick->w, brick->h);
+		AABB box = AABB::make_from_position_size(brick->x + 25 , brick->y + 10, brick->w, brick->h);
+		//AABB box = brick->getCollision();
 
 		//Collisioncheck with bricks
 		if (aabb_circle_intersect(box, circle))
@@ -58,18 +56,21 @@ bool Ball::step(float dx, float dy)
 		}
 	}
 
-	//Check collision with player
+	//Collision with player
 	Player& p = player;
 	AABB box = AABB::make_from_position_size(p.x, p.y, p.w, p.h);
 	if (aabb_circle_intersect(box, circle))
 		return false;
 
-	// Check collisions with game borders
+	//Collision with game borders
 	if (x + dx < 0 || x + dx >= 800 ||
-		y + dy < 0 || y + dy >= 600)
+		y + dy < 0)
 	{
 		return false;
 	}
+	//Kill on bot-border
+	if (y + dy >= 600)
+		alive = false;
 
 	x += dx;
 	y += dy;

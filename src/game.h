@@ -6,14 +6,13 @@
 #include "level.h"
 #include "ball.h"
 
-
 #define BALL_MAX 10
 
 extern Player player;
 extern Level level;
 extern Ball balls[BALL_MAX];
 
-//TODO: Struck vs class, weird t
+//TODO: Struck vs class, weird to have a private?
 struct Game 
 {
 	//TODO: Dont know if really needed

@@ -19,17 +19,23 @@ void Brick::draw()
 
 	switch(hit_points) 
 	{
-		case 1:
+		case 3:
 			SDL_SetRenderDrawColor(renderer, 255, 200, 150, 255);
 			break;
 		case 2:
 			SDL_SetRenderDrawColor(renderer, 255, 200, 200, 255);
 			break;
-		case 3:
+		case 1:
 			SDL_SetRenderDrawColor(renderer, 255, 200, 255, 255);
 			break;
 	}
 
-	SDL_Rect rect = { x, y , w, h };
+	//SDL_Rect rect = { x - w/2, y - h / 2 , w, h };
+	SDL_Rect rect = { x , y , w, h };
 	SDL_RenderFillRect(renderer, &rect);
+
+	//For outline
+	SDL_SetRenderDrawColor(renderer, 25, 25, 40, 255);
+	SDL_RenderDrawRect(renderer, &rect);
+
 }

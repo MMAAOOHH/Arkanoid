@@ -4,7 +4,6 @@ Player player;
 Level level;
 Ball balls[BALL_MAX];
 
-
 Game::Game(){}
 Game::~Game(){}
 
@@ -14,8 +13,8 @@ void Game::init()
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		window = SDL_CreateWindow("Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, 0);
-
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
 		isRunning = true;
 	}
 	else
@@ -24,7 +23,8 @@ void Game::init()
 	//Gets the current CPU counter value.
 	previous_ticks = SDL_GetPerformanceCounter();
 
-	//Create level, should be moved!
+	//TODO: should be moved!
+	//Create level
 	level.create();
 }
 
@@ -36,9 +36,7 @@ void Game::handleEvents()
 		switch (event.type)
 		{
 		case SDL_QUIT:
-
 			isRunning = false;
-
 			break;
 
 		case SDL_KEYDOWN:
@@ -74,14 +72,16 @@ void Game::handleEvents()
 
 void Game::update() 
 {
-	//For framerate independence, delta time, 
+	//For framerate independence, setting delta time 
 	Uint64 ticks = SDL_GetPerformanceCounter();
 	Uint64 delta_ticks = ticks - previous_ticks;
 	previous_ticks = ticks;
 	delta_time = (float)delta_ticks / SDL_GetPerformanceFrequency();
 
+	//Player
 	player.update();
 
+	//Ball
 	for (int i = 0; i < BALL_MAX; ++i) 
 	{
 		balls[i].update();

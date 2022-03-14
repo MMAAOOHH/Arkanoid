@@ -5,6 +5,8 @@ const char* LEVEL =
 "................"
 "................"
 "................"
+"...##########..."
+"..############.."
 ".##############."
 "..############.."
 "...##########..."
@@ -20,8 +22,8 @@ const char* LEVEL =
 "................"
 "................"
 "................"
-"................"
-"................";
+
+;
 
 Brick* bricks[MAP_COLS * MAP_ROWS] = { nullptr };
 
@@ -37,8 +39,8 @@ void Level::create()
 				continue;
 
 			Brick* brick = new Brick();
-			brick->x = x * (brick->w + 1);
-			brick->y = y * (brick->h + 1);
+			brick->x = x * (brick->w);
+			brick->y = y * (brick->h);
 
 			bricks[y * MAP_COLS + x] = brick;
 		}

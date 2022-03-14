@@ -3,7 +3,7 @@
 
 void Brick::take_damage()
 {
-	if (type == u)
+	if (unbreakable)
 		return;
 
 	hit_points--;
@@ -27,6 +27,9 @@ void Brick::draw()
 			break;
 		case 1:
 			SDL_SetRenderDrawColor(renderer, 255, 200, 255, 255);
+			break;
+		case 0:
+			SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
 			break;
 	}
 

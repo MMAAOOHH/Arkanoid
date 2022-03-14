@@ -7,6 +7,8 @@ struct Ball
 	float x;
 	float y;
 
+	float size = 8;
+
 	float velocity_x;
 	float velocity_y;
 

@@ -13,7 +13,7 @@ void Player::update()
 	if (keys[SDL_SCANCODE_A] && (x - w / 2) >= 0)
 		x -= move_speed * delta_time;
 
-	// shoot! pew pew
+	//Todo, move from player
 	shoot_timer -= delta_time;
 	if (keys[SDL_SCANCODE_SPACE] && shoot_timer < 0.f)
 	{
@@ -26,11 +26,7 @@ void Player::update()
 
 
 		proj.velocity_x = 200.f;
-		
-		if (next_projectile_index % 2)
-			proj.velocity_y = 200.f;
-		else
-			proj.velocity_y = -200.f;
+		proj.velocity_y = -200.f;
 			
 
 		shoot_timer = 0.2f;
@@ -43,7 +39,7 @@ void Player::update()
 void Player::draw()
 {
 	//Set the color
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
 	//Create Player rect
 	SDL_Rect rect = { (int)x - w/2, (int)y - h/2, w, h };
 	//Render

@@ -26,17 +26,17 @@ void Ball::draw()
 		return;
 
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-	SDL_Rect rect = { (int)x - 4, (int)y - 4, 8, 8 };
+	SDL_Rect rect = { (int)x - size/2, (int)y - size / 2, size, size };
 
 	SDL_RenderFillRect(renderer, &rect);
 }
 
 bool Ball::step(float dx, float dy)
 {
-	//Collision circle for collision
+	//Collision circle for ball
 	Circle circle = { x + dx, y + dy, 4 };
-	//draw_circle(circle);
 
+	//Collision with bricks
 	for (int i = 0; i < NUM_BRICKS; ++i)
 	{
 		Brick* brick = bricks[i];
@@ -44,12 +44,8 @@ bool Ball::step(float dx, float dy)
 		if (brick == nullptr || !brick->alive)
 			continue;
 
-		//Makes collision for brick
-		AABB box = AABB::make_from_position_size(brick->x + 25 , brick->y + 10, brick->w, brick->h);
-		//AABB box = brick->getCollision();
-
 		//Collisioncheck with bricks
-		if (aabb_circle_intersect(box, circle))
+		if (aabb_circle_intersect(brick->getCollision(), circle))
 		{
 			brick->take_damage();
 			return false;
@@ -58,20 +54,19 @@ bool Ball::step(float dx, float dy)
 
 	//Collision with player
 	Player& p = player;
-	AABB box = AABB::make_from_position_size(p.x, p.y, p.w, p.h);
-	if (aabb_circle_intersect(box, circle))
+	AABB player_box = AABB::make_from_position_size(p.x, p.y, p.w, p.h);
+	if (aabb_circle_intersect(player_box, circle))
 		return false;
 
-	//Collision with game borders
-	if (x + dx < 0 || x + dx >= 800 ||
-		y + dy < 0)
-	{
+	//Collision with game borders (top, left, right)
+	if (x + dx < 0 || x + dx >= 800 || y + dy < 0)
 		return false;
-	}
+	
 	//Kill on bot-border
 	if (y + dy >= 600)
 		alive = false;
 
+	//Ball movement
 	x += dx;
 	y += dy;
 	return true;

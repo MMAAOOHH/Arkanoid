@@ -8,7 +8,7 @@ struct Player
 
 	//Paddle size
 	float w = 128.f;
-	float h = 16.f;
+	float h = 12.f;
 
 	float move_speed = 800.f;
 

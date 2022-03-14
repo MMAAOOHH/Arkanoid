@@ -4,19 +4,8 @@
 struct Brick
 {
 	bool alive = true;
-
-	enum brick_type 
-	{
-		a = 1, 
-		b = 2, 
-		c = 3, 
-		u //unbreakable
-	};
-
-	brick_type type = c;
-
-	//hitpoints defined by type
-	int hit_points = type;
+	bool unbreakable = false;
+	int hit_points = 3;
 
 	//Position
 	float x;
@@ -26,7 +15,7 @@ struct Brick
 	float w = 50.f;
 	float h = 20.f;
 
-	AABB getCollision() { return { x, y, w, h}; }
+	AABB getCollision() { return { x, y, x + w, y + h}; }
 
 	void take_damage();
 	void draw();

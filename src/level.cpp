@@ -6,11 +6,11 @@ const char* LEVEL =
 "................"
 "....11111111...."
 "...1333333331..."
-"..133333133331.."
-".13333322233331."
-"13333312.2133331"
-".13333322233331."
-"..133333133331.."
+"..133331133331.."
+".13333222233331."
+"1333311..2133331"
+".13333222233331."
+"..133331133331.."
 "...1333333331..."
 "....11111111...."
 "0..............0"
@@ -41,7 +41,7 @@ void Level::create()
 			brick->x = x * (brick->w);
 			brick->y = y * (brick->h);
 
-			//Subtract with 48 to convert char to int
+			//Subtracting with 48 to convert char to int (ascii)
 			brick->hit_points = (int)*ptr - '0';
 
 			if (*ptr == '0')
@@ -58,6 +58,7 @@ void Level::draw()
 	for (int i = 0; i < NUM_BRICKS; ++i)
 	{
 	Brick* brick = bricks[i];
+
 	if (brick == nullptr)
 		continue;
 

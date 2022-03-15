@@ -10,8 +10,6 @@ extern Brick* bricks[MAP_COLS * MAP_ROWS];
 
 struct Level 
 {
-	char level_name = 'a';
-
 	void create();
 	void reset();
 	void draw();

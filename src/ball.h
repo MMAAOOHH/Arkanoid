@@ -4,6 +4,7 @@ struct Ball
 {
 	bool alive = false;
 
+	//Position
 	float x;
 	float y;
 
@@ -16,4 +17,6 @@ struct Ball
 	void draw();
 
 	bool step(float dx, float dy);
+
+	bool hit_paddle = false;
 };

@@ -1,7 +1,6 @@
 #include "game.h" //#include - "pastes" in code, includes it.
 
 //main entry point, needed for all .exe files. 
-
 int main()
 {
 	//Create game

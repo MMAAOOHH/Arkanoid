@@ -8,9 +8,9 @@
 void Player::update()
 {
 	// move with input if not hitting edge of screen
-	if (keys[SDL_SCANCODE_D] && (x + w/ 2) <= 800) 
+	if ((keys[SDL_SCANCODE_D] || keys[SDL_SCANCODE_RIGHT]) && (x + w / 2) <= 800)
 		x += move_speed * delta_time;
-	if (keys[SDL_SCANCODE_A] && (x - w / 2) >= 0)
+	if ((keys[SDL_SCANCODE_A] || keys[SDL_SCANCODE_LEFT]) && (x - w / 2) >= 0)
 		x -= move_speed * delta_time;
 
 	//Todo, move from player

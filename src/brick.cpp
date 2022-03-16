@@ -1,15 +1,19 @@
 #include "brick.h"
 #include "engine.h"
+#include "game.h"
 
-void Brick::take_damage()
+void Brick::damage()
 {
 	if (unbreakable)
 		return;
 
 	hit_points--;
 
-	if (hit_points <= 0)
+	if (hit_points <= 0) 
+	{
+		game.level.brick_count--;
 		alive = false;
+	}
 }
 
 void Brick::draw()

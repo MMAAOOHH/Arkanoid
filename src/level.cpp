@@ -30,6 +30,9 @@ void Level::create()
 {
 	//create bricks in level layout
 	const char* ptr = LEVEL;
+	
+	//brick_count = 0;
+	
 	for (int y = 0; y < MAP_ROWS; ++y)
 	{
 		for (int x = 0; x < MAP_COLS; ++x, ++ptr)
@@ -48,6 +51,8 @@ void Level::create()
 				brick->unbreakable = true;
 
 			bricks[y * MAP_COLS + x] = brick;
+
+			brick_count++; 
 		}
 	}
 }

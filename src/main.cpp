@@ -1,22 +1,18 @@
-#include "game.h" //#include - "pastes" in code, includes it.
+#include "game.h" //#include - "pastes" code in.
 
-//main entry point, needed for all .exe files. 
 int main()
 {
-	//Create game
-	Game* game = new Game();
-	game->init();
-
+	game.init();
 	//Gameloop
-	while (game->running())
+	while (game.running())
 	{
-		game->handleEvents();
-		game->update();
-		game->render();
+		game.handleEvents();
+		game.update();
+		game.render();
 
 		//Limits fps, ( 60 )
 		SDL_Delay(16); 
 	}
-	game->clean();
+	game.clean();
 	return 0;
 }

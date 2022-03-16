@@ -1,10 +1,9 @@
-#include <iostream>
 #include "ball.h"
 #include "engine.h"
 #include "collision.h"
 #include "game.h"
 
-float sign(float a) { return a > 0.f ? 1.f : -1.f; }
+float sign(float a) { return a > 0.f ? 1.f : -1.f; } //Where does this live?
 
 void Ball::update()
 {
@@ -13,7 +12,7 @@ void Ball::update()
 
 	if (!step(velocity_x * delta_time, 0.f))
 	{
-		velocity_x = -velocity_x + sign(-velocity_x) * 10;
+		velocity_x = -velocity_x + sign(-velocity_x) * 5;
 	}
 
 	if (!step(0.f, velocity_y * delta_time))
@@ -21,11 +20,10 @@ void Ball::update()
 		if (hit_paddle)
 		{
 			//Direction depending where on paddle we hit
-			if ((x < player.x && velocity_x > 0) || (x > player.x && velocity_x < 0))
+			if ((x < game.player.x && velocity_x > 0) || (x > game.player.x && velocity_x < 0))
 				velocity_x = -velocity_x;
 		}
-		
-		velocity_y = -velocity_y + sign(-velocity_y) * 10;
+		velocity_y = -velocity_y + sign(-velocity_y) * 5;
 	}
 }
 
@@ -48,7 +46,7 @@ bool Ball::step(float dx, float dy)
 	//Collision with bricks
 	for (int i = 0; i < NUM_BRICKS; ++i)
 	{
-		Brick* brick = bricks[i];
+		Brick* brick = game.level.bricks[i];
 		if (brick == nullptr || !brick->alive)
 			continue;
 
@@ -56,22 +54,25 @@ bool Ball::step(float dx, float dy)
 		if (aabb_circle_intersect(brick->getCollision(), circle))
 		{
 			hit_paddle = false;
-			brick->take_damage();
+
+			brick->damage();
 			return false;
 		}
 	}
 
 	//Collision with paddle
-	Player& p = player;
-	AABB player_box = AABB::make_from_position_size(p.x, p.y, p.w, p.h);
-	if (aabb_circle_intersect(player_box, circle))
+	if (dy > 0) //Depenetration-ish
 	{
-		hit_paddle = true;
-		return false;
+		AABB player_box = AABB::make_from_position_size(game.player.x, game.player.y, game.player.w, game.player.h);
+		if (aabb_circle_intersect(player_box, circle))
+		{
+			hit_paddle = true;
+			return false;
+		}
 	}
 
 	//Collision with game borders (top, left, right)
-	if (x + dx < 0 || x + dx >= 800 || y + dy < 0) 
+	if (x + dx < 0 || x + dx >= SCREEN_WIDTH || y + dy < 0) 
 	{
 		hit_paddle = false;
 		return false;

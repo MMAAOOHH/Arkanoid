@@ -17,6 +17,7 @@ struct Brick
 
 	AABB getCollision() { return { x, y, x + w, y + h}; }
 
-	void take_damage();
 	void draw();
+
+	void damage();
 };

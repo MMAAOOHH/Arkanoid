@@ -1,9 +1,6 @@
 #include "game.h"
 
-Player player;
-Level level;
-Ball balls[BALL_MAX];
-
+Game game;
 Game::Game(){}
 Game::~Game(){}
 
@@ -12,7 +9,7 @@ void Game::init()
 	//Initilalize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
-		window = SDL_CreateWindow("Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, 0);
+		window = SDL_CreateWindow("Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 		isRunning = true;
@@ -72,7 +69,7 @@ void Game::handleEvents()
 
 void Game::update() 
 {
-	//For framerate independence, setting delta time 
+	//For framerate independence, setting delta time  TODO: Move to engine.update();
 	Uint64 ticks = SDL_GetPerformanceCounter();
 	Uint64 delta_ticks = ticks - previous_ticks;
 	previous_ticks = ticks;

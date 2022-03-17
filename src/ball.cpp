@@ -54,7 +54,7 @@ bool Ball::step(float dx, float dy)
 		if (aabb_circle_intersect(brick->getCollision(), circle))
 		{
 			hit_paddle = false;
-
+			//bricks_since_paddle++;
 			brick->damage();
 			return false;
 		}
@@ -67,6 +67,7 @@ bool Ball::step(float dx, float dy)
 		if (aabb_circle_intersect(player_box, circle))
 		{
 			hit_paddle = true;
+			//bricks_since_paddle = 0;
 			return false;
 		}
 	}
@@ -81,6 +82,7 @@ bool Ball::step(float dx, float dy)
 	//Kill on bot-border
 	if (y + dy >= 600)
 		alive = false;
+		//player_health--;
 
 	//Ball movement
 	x += dx;

@@ -11,8 +11,8 @@ void Brick::damage()
 
 	if (hit_points <= 0) 
 	{
-		game.level.brick_count--;
 		alive = false;
+		game.level.remove_brick();
 	}
 }
 

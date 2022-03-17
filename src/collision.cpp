@@ -4,6 +4,7 @@
 
 const float PI = 3.1415;
 
+/*
 void draw_circle(const Circle& c)
 {
 	int resolution = 48;
@@ -28,6 +29,7 @@ void draw_circle(const Circle& c)
 		);
 	}
 }
+*/
 
 bool circle_intersect(const Circle& a, const Circle& b)
 {
@@ -53,7 +55,7 @@ AABB AABB::make_from_position_size(float x, float y, float w, float h)
 
 	return box;
 }
-
+/*
 void draw_box(const AABB& box)
 {
 	SDL_Rect rect = {
@@ -65,7 +67,7 @@ void draw_box(const AABB& box)
 
 	SDL_RenderDrawRect(renderer, &rect);
 }
-
+*/
 bool aabb_intersect(const AABB& a, const AABB& b)
 {
 	return (a.x_max > b.x_min &&
@@ -73,6 +75,7 @@ bool aabb_intersect(const AABB& a, const AABB& b)
 			a.y_max > b.y_min &&
 			b.y_max > a.y_min);
 }
+
 
 float clamp(float a, float min, float max)
 {

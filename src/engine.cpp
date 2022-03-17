@@ -1,5 +1,6 @@
 #include "engine.h"
 
+//TODO: Move to game struct or create struct;
 SDL_Window* window;
 SDL_Renderer* renderer;
 

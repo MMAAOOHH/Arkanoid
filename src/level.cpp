@@ -1,29 +1,31 @@
+#include <iostream>
 #include "level.h"
 #include "game.h"
 
 const char* LEVEL =
 "................"
 "................"
-"....11111111...."
-"...1333333331..."
-"..133331133331.."
-".13333222233331."
-"1333311..2133331"
-".13333222233331."
-"..133331133331.."
-"...1333333331..."
-"....11111111...."
+"....33333333...."
+"...3111111113..."
+"..311113311113.."
+".31111222211113."
+"3111112..2111113"
+".31111222211113."
+"..311113311113.."
+"...3111111113..."
+"....33333333...."
 "0..............0"
 ".22222222222222."
 "..333333333333.."
 "................"
 ".11111111111111."
-".00000000000000."
+"..000000000000.."
 "................"
 "................"
 "................"
 ;
 
+//TODO: Move const?
 Brick* bricks[MAP_COLS * MAP_ROWS] = { nullptr };
 
 void Level::create()
@@ -31,7 +33,7 @@ void Level::create()
 	//create bricks in level layout
 	const char* ptr = LEVEL;
 	
-	//brick_count = 0;
+	brick_count = 0;
 	
 	for (int y = 0; y < MAP_ROWS; ++y)
 	{
@@ -74,4 +76,20 @@ void Level::draw()
 void Level::reset() 
 {
 	//reset level to starting layout
+}
+
+void Level::win() 
+{
+	//Level completed
+	std::cout << "BONKERS, YOU CLEARED A LEVEL" << std::endl;
+
+	//Set next level index
+}
+
+void Level::remove_brick() 
+{
+	brick_count--;
+
+	if (brick_count <= 0)
+		win();
 }

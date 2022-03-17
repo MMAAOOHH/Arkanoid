@@ -16,7 +16,13 @@ struct Ball
 	void update();
 	void draw();
 
+	//bool check_collisions();
 	bool step(float dx, float dy);
 
+	//void split(); 
+	//int bricks_since_paddle = 0;
+
 	bool hit_paddle = false;
+
+
 };

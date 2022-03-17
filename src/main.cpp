@@ -3,10 +3,15 @@
 int main()
 {
 	game.init();
+
+	//TODO: Move where?
+	game.level.create();
+	game.shoot_ball();
+
 	//Gameloop
 	while (game.running())
 	{
-		game.handleEvents();
+		game.handle_events();//input
 		game.update();
 		game.render();
 

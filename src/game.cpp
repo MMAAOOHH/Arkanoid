@@ -19,13 +19,9 @@ void Game::init()
 
 	//Gets the current CPU counter value.
 	previous_ticks = SDL_GetPerformanceCounter();
-
-	//TODO: should be moved!
-	//Create level
-	level.create();
 }
 
-void Game::handleEvents()
+void Game::handle_events()
 {
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
@@ -107,4 +103,21 @@ void Game::clean()
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
+}
+
+
+void Game::shoot_ball()
+{
+	Ball& ball = balls[next_ball_index];
+	ball.alive = true;
+
+	//Ball start position = player position
+	ball.x = game.player.x;
+	ball.y = game.player.y - 10;
+
+	ball.velocity_x = 200.f;
+	ball.velocity_y = -200.f;
+
+	next_ball_index++;
+	next_ball_index = next_ball_index % BALL_MAX;
 }

@@ -12,9 +12,10 @@ struct Player
 
 	float move_speed = 800.f;
 
-	float shoot_timer = 0.f;
-	int next_projectile_index = 0;
+	int lives = 3;
 
 	void update();
 	void draw();
+
+	//bool check_border_collision();
 };

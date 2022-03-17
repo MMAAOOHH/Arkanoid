@@ -1,6 +1,8 @@
 #pragma once
 #include <SDL/SDL.h>
 
+//Todo: make engine struct? or move to game struct
+
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 

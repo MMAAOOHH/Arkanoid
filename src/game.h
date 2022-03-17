@@ -24,8 +24,10 @@ struct Game
 	Level level;
 	Ball balls[BALL_MAX];
 
+	int next_ball_index = 0;
+
 	void init();
-	void handleEvents();
+	void handle_events();
 	void update();
 	void render();
 	void clean();
@@ -33,9 +35,10 @@ struct Game
 	//TODO: Find C# equivalent to understand better, maybe just use isRunning bool.
 	bool running() { return isRunning; }
 
-	void start();
-	void win();
-	void lose();
+	//void start();
+	void shoot_ball();
+	//void win();
+	//void lose();
 
 private:
 	bool isRunning = false;

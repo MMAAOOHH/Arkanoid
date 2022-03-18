@@ -75,7 +75,6 @@ void Game::update()
 	{
 		balls[i].update();
 	}
-	std::cout << "Active balls: " << active_balls << std::endl;
 }
 
 void Game::render() 

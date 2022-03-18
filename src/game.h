@@ -11,10 +11,10 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
-//TODO: Struck vs class, weird to have a private field?
+//TODO: Struck vs class, weird to have structs with private fields?
 struct Game 
 {
-	//TODO: Dont know if really needed
+	//TODO: Dont know if really needed?
 	//Constructor 
 	Game();
 	//Destructor

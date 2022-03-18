@@ -26,7 +26,11 @@ struct Game
 
 	int next_ball_index = 0;
 	int active_balls = 0;
+
+	bool has_ball = false;
+
 	//const char* levels[3];
+	//int level_index = 0;
 
 	void init();
 	void handle_events();
@@ -37,7 +41,7 @@ struct Game
 	//TODO: Find C# equivalent to understand better, maybe just use isRunning bool.
 	bool running() { return isRunning; }
 
-	//void start();
+	void start();
 	//void win();
 	void lose();
 

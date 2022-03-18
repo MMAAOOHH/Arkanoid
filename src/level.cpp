@@ -48,8 +48,11 @@ void Level::create()
 			//Subtracting with 48 to convert char to int (ascii)
 			brick->hit_points = (int)*ptr - '0';
 
-			if (*ptr == '0')
+			if (*ptr == '0') {
 				brick->unbreakable = true;
+				brick_count--; //Don't count unbreakable bricks towards total
+			}
+				
 
 			bricks[y * MAP_COLS + x] = brick;
 

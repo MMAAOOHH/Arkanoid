@@ -1,3 +1,4 @@
+#include <iostream>
 #include "player.h"
 #include "engine.h"
 #include "game.h"
@@ -12,6 +13,10 @@ void Player::update()
 		x += move_speed * delta_time;
 	if ((keys[SDL_SCANCODE_A] || keys[SDL_SCANCODE_LEFT]) && (x - w / 2) >= 0)
 		x -= move_speed * delta_time;
+
+	//Shoot ball TODO: Move from player maybe?
+	if ((keys[SDL_SCANCODE_SPACE] && !game.has_ball))
+		game.shoot_ball();
 }
 
 void Player::draw()
@@ -27,6 +32,8 @@ void Player::draw()
 void Player::take_damage() 
 {
 	lives--;
+	std::cout << "Player lives : " << lives << std::endl;
+
 	if (lives <= 0)
 		game.lose();
 }

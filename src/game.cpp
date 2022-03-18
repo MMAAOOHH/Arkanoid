@@ -102,6 +102,17 @@ void Game::clean()
 	SDL_Quit();
 }
 
+void Game::start()
+{
+	player.lives = 3;
+
+	std::cout << " -------------------------- " << std::endl;
+	std::cout << "| WASD / Arrowkeys to move |" << std::endl;
+	std::cout << "| Space to shoot ball      |" << std::endl;
+	std::cout << " -------------------------- " << std::endl;
+	std::cout << "Player lives : " << player.lives << std::endl;
+}
+
 void Game::lose() 
 {
 	std::cout << "GAME OVER" << std::endl;
@@ -109,6 +120,8 @@ void Game::lose()
 
 void Game::shoot_ball()
 {
+	has_ball = true;
+
 	Ball& ball = balls[next_ball_index];
 	ball.alive = true;
 

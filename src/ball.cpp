@@ -78,13 +78,16 @@ bool Ball::step(float dx, float dy)
 	}
 	
 	//Kill on bot-border
-	if (y + dy >= 600) 
+	if (y + dy >= SCREEN_HEIGHT) 
 	{
 		alive = false;
 
 		game.active_balls--;
 		if (game.active_balls <= 0)
+		{
 			game.player.take_damage();
+			game.has_ball = false;
+		}
 	}
 			
 	//Ball movement

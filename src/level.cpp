@@ -90,7 +90,6 @@ void Level::win()
 
 void Level::remove_brick() 
 {
-	//TODO: Actually remove the brick from the array
 	brick_count--;
 	if (brick_count <= 0)
 		win();

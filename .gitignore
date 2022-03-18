@@ -9,3 +9,6 @@ bin/*
 
 # EXCEPT for the SDL .dlls
 !bin/*.dll
+
+# CMake
+cmake-build-*/

@@ -139,7 +139,7 @@ void Game::shoot_ball()
 	next_ball_index = next_ball_index % BALL_MAX;
 }
 
-//TODO: Fix bug when splitting balls leading to more than max amount, ball dissappearing
+//TODO: Fix bug when splitting ball having last index, ball dissappearing
 void Game::split_ball(Ball& ball_to_split) 
 {
 	if (active_balls + 1 >= BALL_MAX)

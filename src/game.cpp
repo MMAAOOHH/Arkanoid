@@ -1,3 +1,4 @@
+#include <iostream>
 #include "game.h"
 
 Game game;
@@ -54,11 +55,6 @@ void Game::handle_events()
 
 			break;
 		}
-
-		case SDL_MOUSEMOTION:
-
-			//Get mouse things
-			break;
 		}
 	}
 }
@@ -98,6 +94,7 @@ void Game::render()
 
 	SDL_RenderPresent(renderer);
 }
+
 void Game::clean() 
 {
 	SDL_DestroyWindow(window);
@@ -105,18 +102,45 @@ void Game::clean()
 	SDL_Quit();
 }
 
+void Game::lose() 
+{
+	std::cout << "GAME OVER" << std::endl;
+}
 
 void Game::shoot_ball()
 {
 	Ball& ball = balls[next_ball_index];
 	ball.alive = true;
 
-	//Ball start position = player position
-	ball.x = game.player.x;
-	ball.y = game.player.y - 10;
+	//Ball start position
+	ball.x = player.x;
+	ball.y = player.y - 10;
 
+	//Ball start direction
 	ball.velocity_x = 200.f;
 	ball.velocity_y = -200.f;
+
+	active_balls++;
+
+	next_ball_index++;
+	next_ball_index = next_ball_index % BALL_MAX;
+}
+
+void Game::split_ball(Ball& ball_to_split) 
+{
+	if (active_balls >= BALL_MAX)
+		return;
+
+	Ball& ball = balls[next_ball_index];
+	ball.alive = true;
+
+	ball.x = ball_to_split.x;
+	ball.y = ball_to_split.y;
+
+	ball.velocity_x -= ball_to_split.velocity_y;
+	ball.velocity_y = ball_to_split.velocity_y;
+
+	active_balls++;
 
 	next_ball_index++;
 	next_ball_index = next_ball_index % BALL_MAX;

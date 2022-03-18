@@ -17,5 +17,7 @@ struct Player
 	void update();
 	void draw();
 
+	void take_damage();
+
 	//bool check_border_collision();
 };

@@ -23,3 +23,10 @@ void Player::draw()
 	//Render
 	SDL_RenderFillRect(renderer, &rect);
 }
+
+void Player::take_damage() 
+{
+	lives--;
+	if (lives <= 0)
+		game.lose();
+}

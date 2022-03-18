@@ -19,10 +19,9 @@ struct Ball
 	//bool check_collisions();
 	bool step(float dx, float dy);
 
-	//void split(); 
-	//int bricks_since_paddle = 0;
-
+	int bricks_since_paddle = 0;
 	bool hit_paddle = false;
 
-
+	void grow_for_split();
+	void ask_to_split();
 };

@@ -7,7 +7,7 @@
 #include "level.h"
 #include "ball.h"
 
-#define BALL_MAX 10
+#define BALL_MAX 5
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
@@ -25,6 +25,8 @@ struct Game
 	Ball balls[BALL_MAX];
 
 	int next_ball_index = 0;
+	int active_balls = 0;
+	//const char* levels[3];
 
 	void init();
 	void handle_events();
@@ -36,9 +38,11 @@ struct Game
 	bool running() { return isRunning; }
 
 	//void start();
-	void shoot_ball();
 	//void win();
-	//void lose();
+	void lose();
+
+	void shoot_ball();
+	void split_ball(Ball& ball_to_split);
 
 private:
 	bool isRunning = false;

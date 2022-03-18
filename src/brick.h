@@ -1,5 +1,6 @@
 #pragma once
 #include "collision.h"
+#include "ball.h"
 
 struct Brick
 {
@@ -19,5 +20,5 @@ struct Brick
 
 	void draw();
 
-	void damage();
+	void damage(Ball* ball_that_hit);
 };

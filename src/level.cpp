@@ -19,13 +19,12 @@ const char* LEVEL =
 "..333333333333.."
 "................"
 ".11111111111111."
-"..000000000000.."
+".00.00000000.00."
 "................"
 "................"
 "................"
 ;
 
-//TODO: Move const?
 Brick* bricks[MAP_COLS * MAP_ROWS] = { nullptr };
 
 void Level::create()
@@ -81,15 +80,15 @@ void Level::reset()
 void Level::win() 
 {
 	//Level completed
-	std::cout << "BONKERS, YOU CLEARED A LEVEL" << std::endl;
+	std::cout << "WHOOP, YOU CLEARED A LEVEL!" << std::endl;
 
 	//Set next level index
 }
 
 void Level::remove_brick() 
 {
+	//TODO: Actually remove the brick from the array
 	brick_count--;
-
 	if (brick_count <= 0)
 		win();
 }

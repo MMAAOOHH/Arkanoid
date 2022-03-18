@@ -12,7 +12,7 @@ void Ball::update()
 
 	if (!step(velocity_x * delta_time, 0.f))
 	{
-		velocity_x = -velocity_x + sign(-velocity_x) * 5;
+		velocity_x = -velocity_x + sign(-velocity_x) * 2;
 	}
 
 	if (!step(0.f, velocity_y * delta_time))
@@ -23,7 +23,7 @@ void Ball::update()
 			if ((x < game.player.x && velocity_x > 0) || (x > game.player.x && velocity_x < 0))
 				velocity_x = -velocity_x;
 		}
-		velocity_y = -velocity_y + sign(-velocity_y) * 5;
+		velocity_y = -velocity_y + sign(-velocity_y) * 2;
 	}
 }
 
@@ -50,12 +50,10 @@ bool Ball::step(float dx, float dy)
 		if (brick == nullptr || !brick->alive)
 			continue;
 
-		//Collision with bricks
 		if (aabb_circle_intersect(brick->getCollision(), circle))
 		{
 			hit_paddle = false;
-			//bricks_since_paddle++;
-			brick->damage();
+			brick->damage(this);
 			return false;
 		}
 	}
@@ -67,7 +65,7 @@ bool Ball::step(float dx, float dy)
 		if (aabb_circle_intersect(player_box, circle))
 		{
 			hit_paddle = true;
-			//bricks_since_paddle = 0;
+			bricks_since_paddle = 0;
 			return false;
 		}
 	}
@@ -80,12 +78,30 @@ bool Ball::step(float dx, float dy)
 	}
 	
 	//Kill on bot-border
-	if (y + dy >= 600)
+	if (y + dy >= 600) 
+	{
 		alive = false;
-		//player_health--;
 
+		game.active_balls--;
+		if (game.active_balls <= 0)
+			game.player.take_damage();
+	}
+			
 	//Ball movement
 	x += dx;
 	y += dy;
 	return true;
+}
+
+void Ball::grow_for_split()
+{
+	bricks_since_paddle++;
+	if (bricks_since_paddle >= 5)
+		ask_to_split();
+}
+
+void Ball::ask_to_split()
+{
+	bricks_since_paddle = 0;
+	game.split_ball(*this);
 }

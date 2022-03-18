@@ -2,7 +2,7 @@
 #include "engine.h"
 #include "game.h"
 
-void Brick::damage()
+void Brick::damage(Ball* ball_that_hit)
 {
 	if (unbreakable)
 		return;
@@ -13,6 +13,7 @@ void Brick::damage()
 	{
 		alive = false;
 		game.level.remove_brick();
+		ball_that_hit->grow_for_split();
 	}
 }
 
@@ -36,7 +37,6 @@ void Brick::draw()
 			SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255);
 			break;
 	}
-
 	//SDL_Rect rect = { x - w/2, y - h / 2 , w, h };
 	SDL_Rect rect = { x , y , w, h };
 	SDL_RenderFillRect(renderer, &rect);
@@ -44,5 +44,4 @@ void Brick::draw()
 	//For outline
 	SDL_SetRenderDrawColor(renderer, 25, 25, 40, 255);
 	SDL_RenderDrawRect(renderer, &rect);
-
 }

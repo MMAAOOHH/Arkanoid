@@ -85,8 +85,8 @@ bool Ball::step(float dx, float dy)
 		game.active_balls--;
 		if (game.active_balls <= 0)
 		{
-			game.player.take_damage();
 			game.has_ball = false;
+			game.player.take_damage();
 		}
 	}
 			

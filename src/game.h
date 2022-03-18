@@ -7,7 +7,7 @@
 #include "level.h"
 #include "ball.h"
 
-#define BALL_MAX 5
+#define BALL_MAX 6
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 

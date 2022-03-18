@@ -75,6 +75,7 @@ void Game::update()
 	{
 		balls[i].update();
 	}
+	std::cout << "Active balls: " << active_balls << std::endl;
 }
 
 void Game::render() 
@@ -105,6 +106,7 @@ void Game::clean()
 void Game::start()
 {
 	player.lives = 3;
+	active_balls = 0;
 
 	std::cout << " -------------------------- " << std::endl;
 	std::cout << "| WASD / Arrowkeys to move |" << std::endl;
@@ -121,6 +123,7 @@ void Game::lose()
 void Game::shoot_ball()
 {
 	has_ball = true;
+	active_balls++;
 
 	Ball& ball = balls[next_ball_index];
 	ball.alive = true;
@@ -133,16 +136,16 @@ void Game::shoot_ball()
 	ball.velocity_x = 200.f;
 	ball.velocity_y = -200.f;
 
-	active_balls++;
-
 	next_ball_index++;
 	next_ball_index = next_ball_index % BALL_MAX;
 }
 
+//TODO: Fix bug when splitting balls leading to more than max amount, ball dissappearing
 void Game::split_ball(Ball& ball_to_split) 
 {
-	if (active_balls >= BALL_MAX)
+	if (active_balls + 1 >= BALL_MAX)
 		return;
+	active_balls++;
 
 	Ball& ball = balls[next_ball_index];
 	ball.alive = true;
@@ -152,8 +155,6 @@ void Game::split_ball(Ball& ball_to_split)
 
 	ball.velocity_x -= ball_to_split.velocity_y;
 	ball.velocity_y = ball_to_split.velocity_y;
-
-	active_balls++;
 
 	next_ball_index++;
 	next_ball_index = next_ball_index % BALL_MAX;

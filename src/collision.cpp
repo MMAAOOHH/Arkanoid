@@ -43,7 +43,8 @@ bool aabb_circle_intersect(const AABB& a, const Circle& b)
 	float dy = b.y - clamped_y;
 
 	float dist_sqrd = dx * dx + dy * dy;
-	float dist = sqrt(dist_sqrd);
+	float dist = sqrt(dist_sqrd); // feedack: when you are only interested in comparing two radii you don't need to perform an expensive sqrt operation.
+									// Its enough to compare just dist_sqrd in this case.
 
 	return dist < b.radius;
 }

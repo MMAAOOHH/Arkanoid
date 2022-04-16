@@ -41,7 +41,7 @@ void Level::create()
 			if (*ptr == '.')
 				continue;
 
-			Brick* brick = new Brick();
+			Brick* brick = new Brick(); // feedback: here you allocate a memory that is never released afterwards with delete operator. This is a memory leak.
 			brick->x = x * (brick->w);
 			brick->y = y * (brick->h);
 

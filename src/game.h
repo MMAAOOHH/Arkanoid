@@ -12,9 +12,17 @@
 #define SCREEN_HEIGHT 600
 
 //TODO: Struck vs class, weird to have structs with private fields?
+// feedback: only difference between struct vs class is the default-private members of classes.
+// actually this is the point with classes: some things should be hidden for "external" users of the class.
+// For example player object could be private here and then Game class will provide functions to access it. This will limit
+// the design of your program to your intentions, so it will be more clear what is expected/allowed from your code and what is not.
+// Right now player object is completely exposed to whoever has instance of the game class. And maybe this is not something that you
+// would like to do from the design perspective.
 struct Game 
 {
-	//TODO: Dont know if really needed?
+	// feedback: they are not required by compiler, only needed if you want to do something useful in them, like deleting previously allocated memory.
+	// In this case I'd say they could be skipped.
+	//TODO: Dont know if really needed? 
 	//Constructor 
 	Game();
 	//Destructor
